@@ -1,7 +1,11 @@
 import javax.swing.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.awt.*;
+
+/**
+ * Quick Hull algorithm to find convex hull.
+ * Average running time: O(nlogn). Worst case O(n^2).
+ */
 
 public class QuickHull {
 
@@ -132,7 +136,7 @@ public class QuickHull {
     }
 
     /**
-     * calculates the distance between the test point and the line draw between points a and b
+     * Calculates the distance between the test point and the line draw between points a and b
      * @param test
      * @param a
      * @param b
@@ -145,7 +149,7 @@ public class QuickHull {
     }
 
     /**
-     * finds the intersection point between two perpendicular lines, one of which goes through point test.
+     * Finds the intersection point between two perpendicular lines, one of which goes through point test.
      * @param k
      * @param d
      * @param test
@@ -186,7 +190,7 @@ public class QuickHull {
                 currPerpInt = perpIntersectionPoint(slope,intercept,point);
                 perp = drawLine(point, currPerpInt);
                 canvas.add(perp);
-                runOnUIThread(() -> canvas.pause(500));
+                pause();
             }
         }
         maxP.setFillColor(red);
@@ -194,6 +198,10 @@ public class QuickHull {
         canvas.remove(perp);
 
         return maxP;
+    }
+
+    private void pause() {
+        runOnUIThread(() -> canvas.pause(500));
     }
 
     public void findUpHull(ArrayList<Point> points, Point a, Point b){
@@ -258,30 +266,7 @@ public class QuickHull {
         try {
             SwingUtilities.invokeAndWait(runnable);
         } catch (Exception e) {
-            throw new RuntimeException(e);  // bad practice but OK for a demo project
+            throw new RuntimeException(e);
         }
     }
-
-//    public static void main(String args[]){
-//        QuickHull q = new QuickHull();
-//        ArrayList<Point> test = new ArrayList<>();
-//
-//        Point p1 = new Point(12, 32, 10);
-//        Point p2 = new Point(45, 98, 10);
-//        Point p3 = new Point(65, 12, 10);
-//        Point p4 = new Point(10, 30, 10);
-//        Point p5 = new Point(45, 45, 10);
-//        Point p6 = new Point(30, 30, 10);
-//        Point p7 = new Point(45, 97.99999, 10);
-//
-//        test.add(p1);
-//        test.add(p2);
-//        test.add(p3);
-//        test.add(p4);
-//        test.add(p5);
-//        test.add(p6);
-//        test.add(p7);
-//
-//        System.out.println(q.quickHull(test));
-//    }
 }

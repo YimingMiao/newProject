@@ -27,12 +27,12 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
         setLayout(new BorderLayout());
         JPanel panel = new JPanel();
 
-        runButton = new JButton("RunQuickHull");
+        runButton = new JButton("Run QuickHull");
         runButton.addActionListener(this);
         panel.add(runButton);
         add(panel, BorderLayout.SOUTH);
 
-        runButton1 = new JButton("RunGram-Scan");
+        runButton1 = new JButton("Run GrahamScan");
         runButton1.addActionListener(this);
         panel.add(runButton1);
         add(panel, BorderLayout.SOUTH);
@@ -56,34 +56,6 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
 
     public static void main(String[] args) {
         Runner runner = new Runner();
-
-//        ArrayList<Point> test = new ArrayList<>();
-//        Point p1 = new Point(130, 250, Point.RADIUS);
-//        Point p2 = new Point(200, 198, Point.RADIUS);
-//        Point p3 = new Point(365, 112, Point.RADIUS);
-//        Point p4 = new Point(210, 430, Point.RADIUS);
-//        Point p5 = new Point(145, 145, Point.RADIUS);
-//        Point p6 = new Point(530, 300, Point.RADIUS);
-//        Point p7 = new Point(745, 197.99999, Point.RADIUS);
-//
-//        runner.add(p1);
-//        runner.add(p2);
-//        runner.add(p3);
-//        runner.add(p4);
-//        runner.add(p5);
-//        runner.add(p6);
-//        runner.add(p7);
-//        runner.pause(3000);
-//        test.add(p1);
-//        test.add(p2);
-//        test.add(p3);
-//        test.add(p4);
-//        test.add(p5);
-//        test.add(p6);
-//        test.add(p7);
-//
-//        QuickHull myQuickHull = new QuickHull(runner);
-//        System.out.println(myQuickHull.quickHull(test));
     }
 
     @Override
@@ -125,20 +97,7 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == runButton){
-            QuickHull q = new QuickHull(this);
-            this.removeAll();
-            for (Point point : points){
-                point.setFillColor(Point.COLOR);
-                this.add(point);
-            }
-            new Thread(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        q.quickHull(points);
-                    }
-                }
-            ).start();
+            runQuickHull();
         }
         if (e.getSource() == refreshButton){
             points.clear();
@@ -152,13 +111,42 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
             for(int i = 0; i < points.size(); i++){
                 pts[i] = points.get(i);
             }
-            GrahamScan g = new GrahamScan(pts, this);
-            this.removeAll();
-            for (Point point : points){
-                point.setFillColor(Point.COLOR);
-                this.add(point);
-            }
-            System.out.println(g.hull());
+            runGrahamScan();
         }
+    }
+
+    private void runGrahamScan() {
+        GrahamScan g = new GrahamScan(pts, this);
+        this.removeAll();
+        for (Point point : points){
+            point.setFillColor(Point.COLOR);
+            this.add(point);
+        }
+
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        g.hull();
+                    }
+                }
+        ).start();
+    }
+
+    private void runQuickHull() {
+        QuickHull q = new QuickHull(this);
+        this.removeAll();
+        for (Point point : points){
+            point.setFillColor(Point.COLOR);
+            this.add(point);
+        }
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        q.quickHull(points);
+                    }
+                }
+        ).start();
     }
 }

@@ -78,9 +78,6 @@ public class CanvasWindow extends JPanel implements GraphicsObserver{
     public void add(GraphicsObject gObject, double x, double y){
         gObject.setPosition(x, y);
         this.add(gObject);
-//        gObject.addObserver(this);
-//        gObjects.add(gObject);
-//        repaint();
     }
 
     /**
@@ -212,7 +209,6 @@ public class CanvasWindow extends JPanel implements GraphicsObserver{
                 System.out.println("-- saved");
             }
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
