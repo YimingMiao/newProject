@@ -18,7 +18,7 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
      * Constructor to create the main program by creating a canvas window.
      */
     public Runner() {
-        super("ConvexHull", 800, 600);
+        super("ConvexHull", 1440, 1080);
         setupUI();
         points = new ArrayList<>();
     }

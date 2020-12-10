@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * Quick Hull algorithm to find convex hull.
@@ -269,4 +270,28 @@ public class QuickHull {
             throw new RuntimeException(e);
         }
     }
+
+//    public static void main(String[] args) {
+//        QuickHull quickHull = new QuickHull(new CanvasWindow("canvas", 100, 100));
+//        Point a = new Point(1-5, 3-5, 5);
+//        Point b = new Point(2-5, 5-5, 5);
+//        System.out.println(quickHull.slope(a,b));
+//
+//        a = new Point(2.5-5, 4-5, 5);
+//        b = new Point(-1.3-5, 9-5, 5);
+//        System.out.println(quickHull.slope(a,b));
+//
+//        a = new Point(-96.724-5, 1-5, 5);
+//        b = new Point(0-5, 0-5, 5);
+//        System.out.println(quickHull.slope(a,b));
+//
+//        ArrayList<Point> points = new ArrayList<Point>(Arrays.asList(new Point(0-5,0-5,5), new Point(10-5, 0-5, 5), new Point(10-5,10-5,5), new Point(-10-5,0-5,5), new Point(0-5, -10-5, 5), new Point(-10-5, 10-5, 5)));
+//        System.out.println(quickHull.findMax(points));
+//
+//        points = new ArrayList<Point>(Arrays.asList(new Point(1-5,1-5,5), new Point(1-5,1-5,5),new Point(1-5,1-5,5)));
+//        System.out.println(quickHull.findMax(points));
+//
+//        points = new ArrayList<Point>(Arrays.asList(new Point(0-5,0-5,5), new Point(1.1-5, 1.1-5, 5), new Point(1.1-5, 1.2-5, 5), new Point(1.2-5, 1.1-5,5)));
+//        System.out.println(quickHull.findMax(points));
+//    }
 }
