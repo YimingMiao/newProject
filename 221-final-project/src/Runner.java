@@ -7,12 +7,16 @@ import static javafx.application.Platform.exit;
 
 public class Runner extends CanvasWindow implements MouseMotionListener, MouseListener,ActionListener{
 
-    private ArrayList<Point> points;
+    public ArrayList<Point> points;
     private Point[] pts;
     private JButton runButton;
     private JButton quitButton;
     private JButton refreshButton;
     private JButton runButton1;
+//    private JLabel time;
+//    private Timer timer;
+    public JLabel pointsnum;
+
 
     /**
      * Constructor to create the main program by creating a canvas window.
@@ -47,6 +51,18 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
         panel.add(quitButton);
         add(panel, BorderLayout.SOUTH);
 
+//        time = new JLabel("0:00");
+//        panel.add(time);
+//        add(panel, BorderLayout.SOUTH);
+
+        JLabel word = new JLabel("Number of points: ");
+        panel.add(word);
+        add(panel, BorderLayout.SOUTH);
+
+        pointsnum = new JLabel("0");
+        panel.add(pointsnum);
+        add(panel, BorderLayout.SOUTH);
+
         addMouseListener(this);
         addMouseMotionListener(this);
 
@@ -58,15 +74,22 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
         Runner runner = new Runner();
     }
 
+    public void updateText(){
+        pointsnum.setText("" + points.size());
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         Point point = new Point(e.getX() - 5, e.getY() - 5, 5);
         this.add(point);
         points.add(point);
+        updateText();
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+
     }
 
     @Override
@@ -98,10 +121,12 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == runButton){
             runQuickHull();
+
         }
         if (e.getSource() == refreshButton){
             points.clear();
             this.removeAll();
+            pointsnum.setText("" + points.size());
         }
         if (e.getSource() == quitButton){
             System.exit(0);
