@@ -80,7 +80,7 @@ public class Runner extends CanvasWindow implements MouseMotionListener, MouseLi
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Point point = new Point(e.getX() - 5, e.getY() - 5, 5);
+        Point point = new Point(e.getX(), e.getY() - 5, 5);
         this.add(point);
         points.add(point);
         updateText();
